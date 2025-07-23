@@ -1,32 +1,72 @@
 {
-  "name": "create-t3-turbo",
+  "name": "timer",
+  "version": "1.0.0",
+  "repository": "https://github.com/zimekk/timer.git",
+  "author": "Marcin Makarewicz <zimekk@gmail.com>",
+  "license": "MIT",
   "private": true,
   "engines": {
-    "node": ">=v18.16.0"
+    "node": "^20.0.0 || ^22.0.0"
   },
-  "packageManager": "pnpm@8.3.1",
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint",
+      "prettier"
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
+  },
+  "eslintIgnore": [
+    "lib/",
+    "public/"
+  ],
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{json,js,jsx,md,scss,ts,tsx,css,yml,yaml}": "prettier --write"
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-organize-imports"
+    ]
+  },
   "scripts": {
-    "build": "turbo build",
-    "clean": "git clean -xdf node_modules",
-    "clean:workspaces": "turbo clean",
-    "db:generate": "turbo db:generate",
-    "db:push": "turbo db:push db:generate",
-    "dev": "turbo dev --parallel",
-    "format": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx,md,json}\" --ignore-path .gitignore",
-    "lint": "turbo lint && manypkg check",
-    "lint:fix": "turbo lint:fix && manypkg fix",
-    "type-check": "turbo type-check",
-    "update:latest": "pnpm -r up -i"
+    "build": "pnpm -r run build",
+    "clean": "rm -rf packages/*/dist packages/*/lib packages/*/node_modules/.vite packages/*/public",
+    "coverage": "pnpm -r run coverage",
+    "dev": "pnpm -r run dev",
+    "lint": "eslint . --ext .json,.js,.jsx,.ts,.tsx",
+    "preview": "pnpm -r run preview",
+    "reset": "rm -rf node_modules packages/*/node_modules",
+    "test": "pnpm -r run test",
+    "update:dedupe": "pnpm dedupe",
+    "update:latest": "pnpm -r up -i",
+    "remote": "worker",
+    "prepare": "husky"
   },
-  "dependencies": {
-    "@acme/eslint-config": "^0.1.0",
-    "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
-    "@manypkg/cli": "^0.20.0",
-    "@types/prettier": "^2.7.2",
-    "eslint": "^8.39.0",
-    "prettier": "^2.8.8",
-    "prettier-plugin-tailwindcss": "^0.2.7",
-    "turbo": "^1.9.3",
-    "typescript": "^4.9.4"
+  "devDependencies": {
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@dev/worker": "workspace:*",
+    "@types/node": "^22.16.5",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.0.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "ts-node-dev": "^2.0.0",
+    "type-coverage": "^2.29.7",
+    "typescript": "^5.8.3"
   }
 }

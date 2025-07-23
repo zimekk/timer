@@ -1,0 +1,13 @@
+{
+  "name": "@dev/app",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "main": "src",
+  "dependencies": {
+    "react": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8"
+  },
+  "scripts": {}
+}

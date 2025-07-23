@@ -1,0 +1,23 @@
+// https://vike.dev/error-page
+// https://github.com/vikejs/vike-react/blob/main/examples/basic/pages/_error/%2BPage.tsx
+import React from "react";
+import { usePageContext } from "vike-react/usePageContext";
+
+export default function Page() {
+  const { is404 } = usePageContext();
+  if (is404) {
+    return (
+      <>
+        <h1>404 Page Not Found</h1>
+        <p>This page could not be found.</p>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <h1>500 Internal Server Error</h1>
+        <p>Something went wrong.</p>
+      </>
+    );
+  }
+}

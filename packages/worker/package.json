@@ -1,0 +1,37 @@
+{
+  "name": "@dev/worker",
+  "type-": "module",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "exports-": {
+    ".": "./src/index.ts",
+    "./*": [
+      "./src/*.ts",
+      "./src/*.tsx",
+      "./src/*/index.ts"
+    ]
+  },
+  "main": "lib",
+  "files": [
+    "bin/",
+    "lib/"
+  ],
+  "bin": {
+    "worker": "bin/worker.js"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production tsc",
+    "remote": "bin/worker.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "dotenv": "^17.2.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "@dev/app",
+  "type": "module",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "eslintConfig": {
+    "env": {
+      "browser": true
+    }
+  },
+  "eslintIgnore": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "clean": "rm -rf node_modules/.vite dist",
+    "coverage": "type-coverage",
+    "dev": "node ./server",
+    "preview": "NODE_ENV=production node ./server"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@dev/app": "workspace:*",
+    "@dev/worker": "workspace:*",
+    "@rollup/wasm-node": "^4.45.1",
+    "@types/express": "^5.0.3",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.7.0",
+    "dotenv": "^17.2.0",
+    "typescript": "^5.8.3",
+    "vike": "^0.4.236",
+    "vike-react": "^0.6.5",
+    "vite": "^7.0.5"
+  }
+}

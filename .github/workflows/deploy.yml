@@ -1,0 +1,34 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - main
+      - zero
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # https://docs.github.com/en/actions/guides/building-and-testing-nodejs#installing-dependencies
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+      - name: Install dependencies
+        run: pnpm install --ignore-scripts
+      - name: Check type coverage
+        run: pnpm coverage
+      - name: Build application
+        run: pnpm build
+      # https://github.com/marketplace/actions/deploy-to-github-pages#using-an-ssh-deploy-key-
+      # https://medium.com/@cmichel/how-to-deploy-a-create-react-app-with-github-actions-5e01f7a7b6b
+      # - name: Deploy to gh-pages
+      #   uses: peaceiris/actions-gh-pages@v4
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: packages/web/public

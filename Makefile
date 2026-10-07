@@ -1,3 +1,5 @@
+branch = zero
+
 default: fetch up prune
 
 config:
@@ -8,8 +10,12 @@ exec:
 
 fetch:
 # 	git fetch origin && git reset --hard origin
-	git fetch origin
-	git reset --hard origin zero
+# 	git fetch origin zero
+# 	git reset --hard origin zero
+# 	git reset --hard origin
+# 	git reset --hard
+	git fetch origin $(branch) && git reset --hard origin
+	git pull
 
 logs:
 	docker compose logs -f --tail=25 app

@@ -11,6 +11,8 @@ setInterval(remote, 5000);
 const isProduction = process.env.NODE_ENV === "production";
 const port = Number(process.env.PORT || 8080);
 
+console.log({ isProduction, port });
+
 startServer();
 
 async function startServer() {

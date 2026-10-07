@@ -9,7 +9,8 @@ exec:
 fetch:
 # 	git fetch origin && git reset --hard origin
 	git fetch origin
-	git reset --hard origin zero
+# 	git reset --hard origin zero
+	git reset --hard
 
 logs:
 	docker compose logs -f --tail=25 app

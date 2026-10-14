@@ -4,7 +4,7 @@ import express from "express";
 import { renderPage } from "vike/server";
 import { root } from "./root.js";
 
-import { remote } from "../remote/index.js";
+import { remote, setVolume } from "../remote/index.js";
 
 setInterval(remote, 5000);
 
@@ -28,7 +28,13 @@ async function startServer() {
 }
 
 function auth(app) {
-  app.get("/auth", (req, res) => res.json({ status: "ok" }));
+  app
+    .get("/auth", (req, res) => res.json({ status: "ok" }))
+    .get("/setVolume", (req, res) =>
+      (({ volume }) => setVolume(volume).then(() => res.json({ volume })))(
+        req.query,
+      ),
+    );
 }
 
 async function assets(app) {

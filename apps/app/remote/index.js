@@ -1,5 +1,17 @@
 const { DMR_URL = "", VCR_URL = "", VCR_VOLUME = "100" } = process.env;
 
+export async function setVolume(volume) {
+  return (
+    VCR_URL &&
+    (async (volume) => (
+      console.log({ volume }),
+      await fetch(`${VCR_URL}/setVolume?volume=${volume}`).then((res) =>
+        res.json(),
+      )
+    ))(volume)
+  );
+}
+
 export const remote = async () => {
   console.log(["remote"], { DMR_URL, VCR_URL, VCR_VOLUME });
 
@@ -17,7 +29,12 @@ export const remote = async () => {
       console.log({ tvOn, power, input, volume, max_volume, rest });
 
       let setPower = undefined;
-      if (["optical1"].includes(input) && ["standby"].includes(power) && tvOn) {
+      if (!DMR_URL) {
+      } else if (
+        ["optical1"].includes(input) &&
+        ["standby"].includes(power) &&
+        tvOn
+      ) {
         console.log(["powerOn"]);
         setPower = true;
       } else if (
@@ -29,15 +46,9 @@ export const remote = async () => {
         setPower = false;
       }
       if (setPower !== undefined) {
-        const setVolume = Number(VCR_VOLUME);
-        if (volume !== setVolume) {
-          VCR_URL &&
-            (async (volume) => (
-              console.log({ volume }),
-              await fetch(`${VCR_URL}/setVolume?volume=${volume}`).then((res) =>
-                res.json(),
-              )
-            ))(setVolume);
+        const newVolume = Number(VCR_VOLUME);
+        if (volume !== newVolume) {
+          await setVolume(newVolume);
         }
         VCR_URL &&
           (async (power) => (
